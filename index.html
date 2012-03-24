@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <title>My First App</title>
-    <link rel="stylesheet" href="sp://import/css/eve.css">
-    <link rel="stylesheet" href="toplist.css">
-</head>
-<body onload="sp = getSpotifyApi(1); myapp = sp.require('myapp'); myapp.init();">
-<h1 id="header">Top list</h1>
-<p>
-	Welcome to the top list.
-</p>
-<ul id="list">
-	<li><span id = "loading">(loading..)</span></li>
-</ul>
-
-<a id="update_button" href="#" onclick="myapp.update();">Uppdatera</a>
-
-<!-- <button class="new-button">Another shiny button with random text!</a> -->
-
-</body>
+	<head>
+	    <meta charset="utf-8">
+	    <title>Beater</title>
+	    <link rel="stylesheet" href="sp://import/css/eve.css">
+	    <link rel="stylesheet" href="toplist.css">
+	</head>
+	<body onload="sp = getSpotifyApi(1); myapp = sp.require('myapp'); myapp.init();">
+		
+		<h1 id="header">Beater</h1>
+		
+		<p>
+			Welcome to beater. We don't have any ui yet.
+		</p>
+		
+		<ul id="list">
+			<li>
+				<span id = "loading">(loading..)</span>
+			</li>
+		</ul>
+		
+		<a id="update_button" href="#" onclick="myapp.update();">Uppdatera</a>
+	
+	</body>
 </html>
