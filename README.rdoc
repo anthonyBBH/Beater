@@ -1,8 +1,11 @@
 == Welcom to Beater!
 Beater is a Spotify Application that helps people plan their playlists regarding beats per minute.
 
+=== Getting started
 You'll need
-* A webservice backend up and running
+* A webservice backend up and running, 
+  for example https://github.com/bastlund/Beater-Webservice
+* Spotify client installed on Windows or Mac
 * Developer licence for the Spotify client
 
 Best
