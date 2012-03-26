@@ -1,20 +1,16 @@
 sp = getSpotifyApi(1);
-var Service = sp.require('service/track_service');
-var View = sp.require('view/track');
 var ViewCurrentTrack = sp.require('view/current_track');
 var models = sp.require('sp://import/scripts/api/models');
 var player = models.player;
+var controller = sp.require('controller/index');
 exports.init = init;
 exports.update = update;
 exports.create = create;
 
 function init() {
 
-	var r = new Service.TrackService();
-	r.all(function(req){
-		var v = new View.TrackView();
-		v.updateTrackList(req);
-	});
+	var IndexController = new controller.IndexController();
+	IndexController.updateAction();
 	
 	player.observe(models.EVENT.CHANGE, function (e) {
         if (e.data.curtrack == true) {
@@ -24,22 +20,11 @@ function init() {
 }
 
 function update(){
-	var r = new Service.TrackService();
-	r.all(function(req){
-		var v = new View.TrackView();
-		v.updateTrackList(req);
-	});
+	var IndexController = new controller.IndexController();
+	IndexController.updateAction();
 }
 
 function create(){
-	var r = new Service.TrackService();
-	var data = document.getElementById('name').value;
-	r.create(data, function(req){
-		var r = new Service.TrackService();
-		r.all(function(req){
-			var v = new View.TrackView();
-			v.updateTrackList(req);
-		});
-	});
-	return false;
+	var IndexController = new controller.IndexController();
+	IndexController.createAction();
 }
