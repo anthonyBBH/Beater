@@ -37,9 +37,9 @@ function TrackService(rails_client) {
 	}
 	
 	// Deletes one track
-	this.delete = function(id, callback){
+	this.remove = function(id, callback){
 		var c = this.get_rails_client();
-		throw 'Not implemented yet!';
+		c.remove(this.method, id, callback);
 	}
 	
 	// Gets or initiates Rails client

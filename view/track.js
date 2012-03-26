@@ -9,15 +9,46 @@ function TrackView(){
 	    
 	    while ( list.childNodes.length >= 1 )
 	    {
-	        list.removeChild( list.firstChild );       
+	        list.removeChild( list.firstChild );    
 	    } 
 
 	    for (var i = 0; i < topListsArray.length; i++) {
 		    var element = document.createElement('li');
-		    element.innerText = topListsArray[i];
+		    element.innerHTML = topListsArray[i] + ' <a class="delete" href="#">Remove</a>';
 		    list.appendChild(element);
 		}
+		
+		bindDeleteEvent();
 	}
+}
+
+
+function bindDeleteEvent(){
+	var delete_elements = getElementByClass('delete');
+	for(var i = 0; i < delete_elements.length; i++){
+		delete_elements[i].onclick = DeleteEvent;
+	}
+}
+
+
+function getElementByClass(matchClass)
+    {
+   	var return_list = [];
+    var elems = document.getElementsByTagName('*'),i;
+    var index = 0;
+    for (i in elems)
+        {
+        if((" "+elems[i].className+" ").indexOf(" "+matchClass+" ") > -1)
+            {
+            	return_list[index] = elems[i];
+            	index++;
+	            }
+        }
+    return return_list;
+    }
+
+function DeleteEvent(){
+	alert('delete event!');
 }
 
 function getTopLists(xml) {

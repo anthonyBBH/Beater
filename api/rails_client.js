@@ -35,7 +35,7 @@ function RailsClient(host){
 	}
 	
 	//Deletes one record
-	this.delete = function(method, id){
+	this.remove = function(method, id){
 		throw 'Not implemented yet!';
 	}
 	
