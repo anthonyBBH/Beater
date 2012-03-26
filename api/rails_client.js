@@ -35,8 +35,9 @@ function RailsClient(host){
 	}
 	
 	//Deletes one record
-	this.remove = function(method, id){
-		throw 'Not implemented yet! (You tried to remove '+id+')';
+	this.remove = function(method, id, callback){
+		var url = this.host + "/" + method + "/" + id;
+		this.http_delete(url, callback);
 	}
 	
 	//Perform a GET request against Rails webservice
@@ -61,5 +62,18 @@ function RailsClient(host){
 			}
 		}
 		req.send(data);
+	}
+	
+	//Perform a delete request against Rails webservice
+	this.http_delete = function (url, callback){
+		console.log("trying to remove: " + url);
+		var req = this.request_adapter;
+		req.open("DELETE", url, true);
+		req.onreadystatechange = function() {
+			if (req.readyState == 4) {
+				callback(req);
+			}
+		}
+		req.send();
 	}
 }
