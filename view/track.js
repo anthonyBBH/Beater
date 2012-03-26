@@ -14,7 +14,7 @@ function TrackView(){
 
 	    for (var i = 0; i < topListsArray.length; i++) {
 		    var element = document.createElement('li');
-		    element.innerHTML = topListsArray[i] + ' <a class="delete" href="#">Remove</a>';
+		    element.innerHTML = topListsArray[i]['uri'] + ' <a class="delete" rel="' + topListsArray[i]['id'] + '" href="#">Remove</a>';
 		    list.appendChild(element);
 		}
 		
@@ -47,18 +47,21 @@ function getElementByClass(matchClass)
     return return_list;
     }
 
-function DeleteEvent(){
-	alert('delete event!');
+function DeleteEvent(e){
+	alert('delete event!' + e.target.getAttribute("rel"));
 }
 
 function getTopLists(xml) {
   var topLists = xml.getElementsByTagName("track");
-  var topListsArray = [];
+  var topListsArray = new Array();
     if (topLists) {
       for (var i = 0; i < topLists.length; i++) {
       	if(topLists[i].nodeType === 1){
+      		var e = new Array();
 	      	var name = topLists[i];
-	        topListsArray[i] = name.getElementsByTagName('uri')[0].firstChild.data;
+	      	e['uri']  = name.getElementsByTagName('uri')[0].firstChild.data;
+	      	e['id'] = name.getElementsByTagName('id')[0].firstChild.data;
+	        topListsArray[i] = e;
 	    }
       }
     }
