@@ -4,7 +4,13 @@ function TrackView(){
 	this.updateTrackList = function(req){
 		var topListsArray = getTopLists(req.responseXML);
 	    document.getElementById('loading').innerText = '';
+	    
 	    var list = document.getElementById('list');
+	    
+	    while ( list.childNodes.length >= 1 )
+	    {
+	        list.removeChild( list.firstChild );       
+	    } 
 
 	    for (var i = 0; i < topListsArray.length; i++) {
 		    var element = document.createElement('li');

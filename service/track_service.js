@@ -14,7 +14,8 @@ function TrackService(rails_client) {
 	
 	// Create one track
 	this.create = function(data, callback){
-		throw 'Not implemented yet!';
+		var c = this.get_rails_client();
+		c.create(this.method, data, callback);
 	}
 	
 	// Find track by id

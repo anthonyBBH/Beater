@@ -6,6 +6,7 @@ var models = sp.require('sp://import/scripts/api/models');
 var player = models.player;
 exports.init = init;
 exports.update = update;
+exports.create = create;
 
 function init() {
 
@@ -28,4 +29,17 @@ function update(){
 		var v = new View.TrackView();
 		v.updateTrackList(req);
 	});
+}
+
+function create(){
+	var r = new Service.TrackService();
+	var data = document.getElementById('name').value;
+	r.create(data, function(req){
+		var r = new Service.TrackService();
+		r.all(function(req){
+			var v = new View.TrackView();
+			v.updateTrackList(req);
+		});
+	});
+	return false;
 }

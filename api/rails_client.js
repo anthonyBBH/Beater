@@ -11,7 +11,9 @@ function RailsClient(host){
 	
 	//Create one record
 	this.create = function (method, data, callback){
-		throw 'Not implemented yet!';
+		var url = this.host + "/" + method;
+		data = "<track><uri>" + data + "</uri></track>";
+		this.post(url, data, callback);
 	}
 	
 	//Get one record
@@ -47,5 +49,17 @@ function RailsClient(host){
 			}
 		}
 		req.send();
+	}
+	
+	//Perform a POST request against Rails webservice
+	this.post = function (url, data, callback){
+		var req = this.request_adapter;
+		req.open("POST", url, true);
+		req.onreadystatechange = function() {
+			if (req.readyState == 4) {
+				callback(req);
+			}
+		}
+		req.send(data);
 	}
 }

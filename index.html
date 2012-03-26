@@ -14,13 +14,17 @@
 			Welcome to beater. We don't have any ui yet.
 		</p>
 		
+		<span id="loading">loading...</span>
+		
 		<ul id="list">
-			<li>
-				<span id = "loading">(loading..)</span>
-			</li>
 		</ul>
 		
 		<a id="update_button" href="#" onclick="beater.update();">Uppdatera</a>
+		
+		<form id ="add">
+			<input id="name" name="">
+			<input value="Add track" type="button" onclick="beater.create();" /> 
+		</form>
 	
 	</body>
 </html>
