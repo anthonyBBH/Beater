@@ -1,3 +1,5 @@
+//This file is a mess
+//TODO: Fix mess
 var Service = sp.require('service/track_service');
 exports.TrackView = TrackView;
 
@@ -51,8 +53,6 @@ function getElementByClass(matchClass)
 function DeleteEvent(e){
 	var s = new Service.TrackService();
 	var id = e.target.getAttribute("rel");
-	
-	console.log('id: ' + id);
 	
 	if(!id){
 		throw 'Not a valid id!';

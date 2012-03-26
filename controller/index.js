@@ -4,6 +4,8 @@ var Service = sp.require('service/track_service');
 var View = sp.require('view/track');
 
 function IndexController (){
+	
+	//Updates track list
 	this.updateAction = function(){
 		var r = new Service.TrackService();
 		r.all(function(req){
@@ -12,6 +14,7 @@ function IndexController (){
 		});
 	}
 	
+	//Creates new track and updates track list
 	this.createAction = function(){
 		var r = new Service.TrackService();
 		var data = document.getElementById('name').value;
@@ -19,16 +22,10 @@ function IndexController (){
 		return false;
 	}
 	
+	//Removes one track and updates track list
 	this.removeAction = function(){
 		var s = new Service.TrackService();
 		var id = e.target.getAttribute("rel");
-		
-		s.remove(id, function (req){
-			var r = new Service.TrackService();
-			r.all(function(req){
-				var v = new TrackView();
-				v.updateTrackList(req);
-			});
-		});
+		s.remove(id, this.update );
 	}
 }

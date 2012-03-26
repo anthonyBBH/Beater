@@ -43,7 +43,6 @@ function RailsClient(host){
 	
 	//Perform a GET request against Rails webservice
 	this.http_get = function (url, callbacks){
-		console.log("trying to get: " + url);
 		var req = this.request_adapter;
 		req.open("GET", url, true);
 		req.setRequestHeader("Content-Type", "application/xml");
@@ -64,7 +63,6 @@ function RailsClient(host){
 	
 	//Perform a POST request against Rails webservice
 	this.http_post = function (url, data, callbacks){
-		console.log("trying to post: " + url);
 		var req = this.request_adapter;
 		req.open("POST", url, true);
 		req.setRequestHeader("Content-Type", "application/xml");
@@ -85,7 +83,6 @@ function RailsClient(host){
 	
 	//Perform a delete request against Rails webservice
 	this.http_delete = function (url, callbacks){
-		console.log("trying to delete: " + url);
 		var req = this.request_adapter;
 		req.open("DELETE", url, true);
 		req.setRequestHeader("Content-Type", "application/xml");
@@ -101,7 +98,6 @@ function RailsClient(host){
 				}
 			}
 		}
-		console.log('sending delete');
 		req.send();
 	}
 }

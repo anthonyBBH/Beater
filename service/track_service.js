@@ -47,7 +47,6 @@ function TrackService(rails_client) {
 	
 	// Deletes one track
 	this.remove = function(id, callback){
-		console.log('service remove: ' + id);
 		var c = this.get_rails_client();
 		var handler = {
 			ok: callback

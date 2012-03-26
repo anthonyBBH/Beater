@@ -5,8 +5,17 @@
 	    <title>Beater</title>
 	    <link rel="stylesheet" href="sp://import/css/eve.css">
 	    <link rel="stylesheet" href="toplist.css">
+	    <script>
+	    //Bootstraps the application
+	    function start(){
+	    	sp = getSpotifyApi(1); 
+	    	beater = sp.require('beater'); 
+	    	main = new beater.Init(); 
+	    	main.init();
+	    }
+	    </script>
 	</head>
-	<body onload="sp = getSpotifyApi(1); beater = sp.require('beater'); beater.init();">
+	<body onload="start();">
 		
 		<h1 id="header">Beater</h1>
 		
@@ -19,11 +28,11 @@
 		<ul id="list">
 		</ul>
 		
-		<a id="update_button" href="#" onclick="beater.update();">Uppdatera</a>
+		<a id="update_button" href="#" onclick="main.update();">Uppdatera</a>
 		
 		<form id ="add">
 			<input id="name" name="">
-			<input value="Add track" type="button" onclick="beater.create();" /> 
+			<input value="Add track" type="button" onclick="main.create();" /> 
 		</form>
 	
 	</body>
