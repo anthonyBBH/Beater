@@ -52,8 +52,18 @@ function DeleteEvent(e){
 	var s = new Service.TrackService();
 	var id = e.target.getAttribute("rel");
 	
-	s.remove(id, function (){
-		alert('done');
+	console.log('id: ' + id);
+	
+	if(!id){
+		throw 'Not a valid id!';
+	}
+	
+	s.remove(id, function (req){
+		var r = new Service.TrackService();
+		r.all(function(req){
+			var v = new TrackView();
+			v.updateTrackList(req);
+		});
 	});
 }
 

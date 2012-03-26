@@ -15,19 +15,28 @@ function TrackService(rails_client) {
 	// Create one track
 	this.create = function(data, callback){
 		var c = this.get_rails_client();
-		c.create(this.method, data, callback);
+		var handler = {
+			ok: callback
+			};
+		c.create(this.method, data, handler);
 	}
 	
 	// Find track by id
 	this.find_by_id = function(id, callback){
 		var c = this.get_rails_client();
-		c.get_one(this.method, id, callback );
+		var handler = {
+			ok: callback
+			};
+		c.get_one(this.method, id, handler );
 	}
 	
 	// Find all tracks
-	this.all = function(id, callback){
+	this.all = function(callback){
 		var c = this.get_rails_client();
-		c.get_all(this.method, id, callback );
+		var handler = {
+			ok: callback
+			};
+		c.get_all(this.method, handler );
 	}
 	
 	// Update one track
@@ -38,8 +47,12 @@ function TrackService(rails_client) {
 	
 	// Deletes one track
 	this.remove = function(id, callback){
+		console.log('service remove: ' + id);
 		var c = this.get_rails_client();
-		c.remove(this.method, id, callback);
+		var handler = {
+			ok: callback
+			};
+		c.remove(this.method, id, handler);
 	}
 	
 	// Gets or initiates Rails client

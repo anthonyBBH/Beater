@@ -9,23 +9,24 @@ function RailsClient(host){
 	//The web request adapter
 	this.request_adapter = new XMLHttpRequest();
 	
+	
 	//Create one record
 	this.create = function (method, data, callback){
 		var url = this.host + "/" + method;
 		data = "<track><uri>" + data + "</uri></track>";
-		this.post(url, data, callback);
+		this.http_post(url, data, callback);
 	}
 	
 	//Get one record
 	this.get_one = function (method, id, callback){
 		var url = this.host + "/" + method + "/" + id + ".xml";
-		this.get(url, callback);
+		this.http_get(url, callback);
 	};
 	
 	//Get all records
-	this.get_all = function (method, callback){
+	this.get_all = function (method, callbacks){
 		var url = this.host + "/" + method + ".xml";
-		this.get(url, callback);
+		this.http_get(url, callbacks);
 		
 	};
 	
@@ -41,39 +42,66 @@ function RailsClient(host){
 	}
 	
 	//Perform a GET request against Rails webservice
-	this.get = function (url, callback){
+	this.http_get = function (url, callbacks){
+		console.log("trying to get: " + url);
 		var req = this.request_adapter;
 		req.open("GET", url, true);
+		req.setRequestHeader("Content-Type", "application/xml");
 		req.onreadystatechange = function() {
 			if (req.readyState == 4) {
-				callback(req);
+				switch (req.status){
+					case 200:
+						callbacks.ok(req);
+					break;
+					default:
+						throw 'Http call gone bad: ' + req.status;
+					break;
+				}
 			}
 		}
 		req.send();
 	}
 	
 	//Perform a POST request against Rails webservice
-	this.post = function (url, data, callback){
+	this.http_post = function (url, data, callbacks){
+		console.log("trying to post: " + url);
 		var req = this.request_adapter;
 		req.open("POST", url, true);
+		req.setRequestHeader("Content-Type", "application/xml");
 		req.onreadystatechange = function() {
 			if (req.readyState == 4) {
-				callback(req);
+				switch (req.status){
+					case 200:
+						callbacks.ok(req);
+					break;
+					default:
+						throw 'Http call gone bad: ' + req.status;
+					break;
+				}
 			}
 		}
 		req.send(data);
 	}
 	
 	//Perform a delete request against Rails webservice
-	this.http_delete = function (url, callback){
-		console.log("trying to remove: " + url);
+	this.http_delete = function (url, callbacks){
+		console.log("trying to delete: " + url);
 		var req = this.request_adapter;
 		req.open("DELETE", url, true);
+		req.setRequestHeader("Content-Type", "application/xml");
 		req.onreadystatechange = function() {
 			if (req.readyState == 4) {
-				callback(req);
+				switch (req.status){
+					case 204:
+						callbacks.ok(req);
+					break;
+					default:
+						throw 'Http call gone bad: ' + req.status;
+					break;
+				}
 			}
 		}
+		console.log('sending delete');
 		req.send();
 	}
 }
