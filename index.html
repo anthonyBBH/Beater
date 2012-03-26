@@ -6,7 +6,7 @@
 	    <link rel="stylesheet" href="sp://import/css/eve.css">
 	    <link rel="stylesheet" href="toplist.css">
 	</head>
-	<body onload="sp = getSpotifyApi(1); myapp = sp.require('myapp'); myapp.init();">
+	<body onload="sp = getSpotifyApi(1); beater = sp.require('beater'); beater.init();">
 		
 		<h1 id="header">Beater</h1>
 		
@@ -20,7 +20,7 @@
 			</li>
 		</ul>
 		
-		<a id="update_button" href="#" onclick="myapp.update();">Uppdatera</a>
+		<a id="update_button" href="#" onclick="beater.update();">Uppdatera</a>
 	
 	</body>
 </html>

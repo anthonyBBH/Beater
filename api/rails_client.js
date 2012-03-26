@@ -9,18 +9,33 @@ function RailsClient(host){
 	//The web request adapter
 	this.request_adapter = new XMLHttpRequest();
 	
-	//Get one record from Rails webservice
+	//Create one record
+	this.create = function (method, data, callback){
+		throw 'Not implemented yet!';
+	}
+	
+	//Get one record
 	this.get_one = function (method, id, callback){
 		var url = this.host + "/" + method + "/" + id + ".xml";
 		this.get(url, callback);
 	};
 	
-	//Get all records from Rails webservice
+	//Get all records
 	this.get_all = function (method, callback){
 		var url = this.host + "/" + method + ".xml";
 		this.get(url, callback);
 		
 	};
+	
+	//Updates one record
+	this.update = function(method, id, data, callback){
+		throw 'Not implemented yet!';
+	}
+	
+	//Deletes one record
+	this.delete = function(method, id){
+		throw 'Not implemented yet!';
+	}
 	
 	//Perform a GET request against Rails webservice
 	this.get = function (url, callback){

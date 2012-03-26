@@ -3,9 +3,6 @@ exports.TrackView = TrackView;
 function TrackView(){
 	this.updateTrackList = function(req){
 		var topListsArray = getTopLists(req.responseXML);
-			
-		console.log(topListsArray);
-		
 	    document.getElementById('loading').innerText = '';
 	    var list = document.getElementById('list');
 
@@ -19,7 +16,6 @@ function TrackView(){
 
 function getTopLists(xml) {
   var topLists = xml.getElementsByTagName("track");
-  console.log(topLists);
   var topListsArray = [];
     if (topLists) {
       for (var i = 0; i < topLists.length; i++) {
