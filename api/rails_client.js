@@ -36,7 +36,7 @@ function RailsClient(host){
 	
 	//Deletes one record
 	this.remove = function(method, id){
-		throw 'Not implemented yet!';
+		throw 'Not implemented yet! (You tried to remove '+id+')';
 	}
 	
 	//Perform a GET request against Rails webservice

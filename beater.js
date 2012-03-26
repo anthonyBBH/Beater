@@ -7,7 +7,6 @@ var player = models.player;
 exports.init = init;
 exports.update = update;
 exports.create = create;
-exports.remove = remove;
 
 function init() {
 
@@ -43,9 +42,4 @@ function create(){
 		});
 	});
 	return false;
-}
-
-function remove(id){
-	var r = new Service.TrackService();
-	
 }

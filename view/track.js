@@ -1,3 +1,4 @@
+var Service = sp.require('service/track_service');
 exports.TrackView = TrackView;
 
 function TrackView(){
@@ -48,7 +49,12 @@ function getElementByClass(matchClass)
     }
 
 function DeleteEvent(e){
-	alert('delete event!' + e.target.getAttribute("rel"));
+	var s = new Service.TrackService();
+	var id = e.target.getAttribute("rel");
+	
+	s.remove(id, function (){
+		alert('done');
+	});
 }
 
 function getTopLists(xml) {
