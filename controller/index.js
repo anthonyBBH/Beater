@@ -15,10 +15,9 @@ function IndexController (){
 	}
 	
 	//Creates new track and updates track list
-	this.createAction = function(){
+	this.createAction = function(uri){
 		var r = new Service.TrackService();
-		var data = document.getElementById('name').value;
-		r.create(data, this.updateAction );
+		r.create(uri, this.updateAction );
 		return false;
 	}
 	
