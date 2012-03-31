@@ -22,12 +22,12 @@ function TrackService(rails_client) {
 	}
 	
 	// Find track by id
-	this.find_by_id = function(id, callback){
+	this.find_by_uri = function(uri, callback){
 		var c = this.get_rails_client();
 		var handler = {
 			ok: callback
 			};
-		c.get_one(this.method, id, handler );
+		c.get_one(this.method, uri, handler);
 	}
 	
 	// Find all tracks
@@ -36,13 +36,16 @@ function TrackService(rails_client) {
 		var handler = {
 			ok: callback
 			};
-		c.get_all(this.method, handler );
+		c.get_all(this.method, handler);
 	}
 	
 	// Update one track
 	this.update = function(id, data, callback){
 		var c = this.get_rails_client();
-		throw 'Not implemented yet!';
+		var handler = {
+			ok: callback
+			};
+		c.update(this.method, id, data, handler);
 	}
 	
 	// Deletes one track

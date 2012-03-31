@@ -9,43 +9,44 @@ function RailsClient(host){
 	//The web request adapter
 	this.request_adapter = new XMLHttpRequest();
 	
-	
 	//Create one record
-	this.create = function (method, data, callback){
-		var url = this.host + "/" + method;
-		data = "<track><uri>" + data + "</uri></track>";
-		this.http_post(url, data, callback);
+	this.create = function (method, data, callbacks){
+		var url = this.host + "/" + method + ".json";
+		data = "{\"uri\":data }";
+		this.http_post(url, data, callbacks);
 	}
 	
 	//Get one record
-	this.get_one = function (method, id, callback){
-		var url = this.host + "/" + method + "/" + id + ".xml";
-		this.http_get(url, callback);
+	this.get_one = function (method, uri, callbacks){
+		var url = this.host + "/" + method + "/" + uri + ".json";
+		this.http_get(url, callbacks);
 	};
 	
 	//Get all records
 	this.get_all = function (method, callbacks){
-		var url = this.host + "/" + method + ".xml";
+		var url = this.host + "/" + method + ".json";
 		this.http_get(url, callbacks);
 		
 	};
 	
 	//Updates one record
-	this.update = function(method, id, data, callback){
-		throw 'Not implemented yet!';
+	this.update = function(method, id, data, callbacks){
+		var url = this.host + "/" + method + ".json";
+		this.http_post(url, data, callbacks);
 	}
 	
 	//Deletes one record
-	this.remove = function(method, id, callback){
-		var url = this.host + "/" + method + "/" + id;
-		this.http_delete(url, callback);
+	this.remove = function(method, id, callbacks){
+		var url = this.host + "/" + method + "/" + id + ".json";
+		this.http_delete(url, callbacks);
 	}
 	
 	//Perform a GET request against Rails webservice
 	this.http_get = function (url, callbacks){
 		var req = this.request_adapter;
 		req.open("GET", url, true);
-		req.setRequestHeader("Content-Type", "application/xml");
+		req.setRequestHeader("Content-Type", "application/json");
+		req.setRequestHeader("Accepts", "application/json");
 		req.onreadystatechange = function() {
 			if (req.readyState == 4) {
 				switch (req.status){
@@ -65,7 +66,7 @@ function RailsClient(host){
 	this.http_post = function (url, data, callbacks){
 		var req = this.request_adapter;
 		req.open("POST", url, true);
-		req.setRequestHeader("Content-Type", "application/xml");
+		req.setRequestHeader("Content-Type", "application/json");
 		req.onreadystatechange = function() {
 			if (req.readyState == 4) {
 				switch (req.status){
@@ -73,7 +74,7 @@ function RailsClient(host){
 						callbacks.ok(req);
 					break;
 					default:
-						throw 'Http call gone bad: ' + req.status;
+						throw 'Http call gone bad: ' + req.status + ", " + url;
 					break;
 				}
 			}
@@ -85,7 +86,7 @@ function RailsClient(host){
 	this.http_delete = function (url, callbacks){
 		var req = this.request_adapter;
 		req.open("DELETE", url, true);
-		req.setRequestHeader("Content-Type", "application/xml");
+		req.setRequestHeader("Content-Type", "application/json");
 		req.onreadystatechange = function() {
 			if (req.readyState == 4) {
 				switch (req.status){

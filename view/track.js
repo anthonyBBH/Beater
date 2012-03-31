@@ -4,26 +4,46 @@ var Service = sp.require('service/track_service');
 exports.TrackView = TrackView;
 
 function TrackView(){
-	this.updateTrackList = function(req){
-		var topListsArray = getTopLists(req.responseXML);
-	    document.getElementById('loading').innerText = '';
-	    
-	    var list = document.getElementById('list');
-	    
-	    while ( list.childNodes.length >= 1 )
+	this.updateTrackList= function(req){
+		var fruit = JSON.parse(req.responseText);
+		var list = document.getElementById('list');
+		while ( list.childNodes.length >= 1 )
 	    {
 	        list.removeChild( list.firstChild );    
 	    } 
-
-	    for (var i = 0; i < topListsArray.length; i++) {
-		    var element = document.createElement('li');
-		    element.innerHTML = topListsArray[i]['uri'] + ' <a class="delete" rel="' + topListsArray[i]['id'] + '" href="#">Remove</a>';
-		    list.appendChild(element);
+		
+		for(var i = 0; i<fruit.length; i++){
+			console.log(fruit[i].uri);
+			var element = document.createElement('li');
+			element.innerHTML = fruit[i].uri + ' <a class="delete" rel="' + fruit[i].id + '" href="#">Remove</a>';
+			list.appendChild(element);
 		}
 		
 		bindDeleteEvent();
 	}
 }
+
+// function TrackView(){
+	// this.updateTrackList = function(req){
+		// var topListsArray = getTopLists(req.responseXML);
+	    // document.getElementById('loading').innerText = '';
+// 	    
+	    // var list = document.getElementById('list');
+// 	    
+	    // while ( list.childNodes.length >= 1 )
+	    // {
+	        // list.removeChild( list.firstChild );    
+	    // } 
+// 
+	    // for (var i = 0; i < topListsArray.length; i++) {
+		    // var element = document.createElement('li');
+		    // element.innerHTML = topListsArray[i]['uri'] + ' <a class="delete" rel="' + topListsArray[i]['id'] + '" href="#">Remove</a>';
+		    // list.appendChild(element);
+		// }
+// 		
+		// bindDeleteEvent();
+	// }
+// }
 
 
 function bindDeleteEvent(){

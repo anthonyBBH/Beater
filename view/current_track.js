@@ -1,9 +1,8 @@
+exports.updatePageWithTrackDetails = updatePageWithTrackDetails;
 sp = getSpotifyApi(1);
 var models = sp.require('sp://import/scripts/api/models');
 var player = models.player;
-var controller = sp.require('controller/index');
-
-exports.updatePageWithTrackDetails = updatePageWithTrackDetails;
+var Service = sp.require('service/track_service');
 
 function updatePageWithTrackDetails() {
 
@@ -18,7 +17,10 @@ function updatePageWithTrackDetails() {
     } else {
         var track = playerTrackInfo.data;
         header.innerHTML = track.name + " on the album " + track.album.name + " by " + track.album.artist.name + " uri: " + track.uri + ".";
-    	this.controller = new controller.IndexController();
-    	this.controller.createAction(track.uri);
+    	
+    	var s = new Service.TrackService();
+		s.find_by_uri(track.uri, function(){});
+		console.log('done');
+
     }
 }
